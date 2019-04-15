@@ -1,6 +1,5 @@
 package benassi
 package satisfaction
-
 import org.scalatest.{FlatSpec, Matchers}
 
 class TruthSpec extends FlatSpec with Matchers {
