@@ -4,7 +4,7 @@ import org.scalatest.{FlatSpec, Matchers}
 
 class TruthSpec extends FlatSpec with Matchers {
 
-  import Truth._
+  import TruthImplicits._
 
   def evaluate[E <: Expression](implicit t: Truth[E]): Option[E] = Option.empty[E]
 
