@@ -2,19 +2,21 @@ package benassi
 package satisfaction
 package interpretation
 
-trait BinaryInterpretation[E[_,_]]
+class BinaryInterpretation[E[_,_] <: Expression]
 
-object BinaryInterpretation extends LowPriorityBinaryInterpretation {
+trait BinaryInterpretations extends LowPriorityBinaryInterpretations {
 
-  implicit def trueInterpretation[E[_, _] <: Expression]
+  implicit def true2Interpretation[E[_, _] <: Expression]
   (implicit i: TotalInterpretation[({type λ[α] = E[T, α]})#λ]
   ): BinaryInterpretation[E] = null
 }
 
-trait LowPriorityBinaryInterpretation {
+trait LowPriorityBinaryInterpretations extends TotalInterpretations {
 
-  implicit def falseInterpretation[E[_, _] <: Expression]
+  implicit def false2Interpretation[E[_, _] <: Expression]
   (implicit i: TotalInterpretation[({type λ[α] = E[F, α]})#λ]
   ): BinaryInterpretation[E] = null
 
 }
+
+object BinaryInterpretations extends BinaryInterpretations

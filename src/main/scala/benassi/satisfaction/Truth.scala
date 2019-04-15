@@ -3,7 +3,7 @@ package satisfaction
 
 trait Truth[E]
 
-object Truth extends FalsenessImplicits {
+trait TruthImplicits extends FalsenessImplicits {
 
   implicit val theTruth: Truth[True] = null
 
@@ -12,6 +12,8 @@ object Truth extends FalsenessImplicits {
   implicit def notTruth[L <: Expression](implicit f: Falseness[L]): Truth[~[L]] = null
 
 }
+
+object TruthImplicits extends TruthImplicits
 
 trait Falseness[E]
 
