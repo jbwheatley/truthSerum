@@ -1,17 +1,15 @@
-package benassi
-package satisfaction
-package Interpretation
+package benassi.satisfaction
 
-import benassi.satisfaction.interpretation.{BinaryInterpretation, TertiaryInterpretation, TotalInterpretation}
+import benassi._
 import org.scalatest.{FlatSpec, Matchers}
 
-class InterpretationSpec extends FlatSpec with Matchers {
+class SatisfactionTests extends FlatSpec with Matchers {
 
-  import benassi.satisfaction.interpretation.TertiaryInterpretations._
+  import SatisfactionImplicits._
 
-  def satisfiable1[E[_] <: Expression](implicit i: TotalInterpretation[E]): Option[E[Any]] = Option.empty[E[Any]]
-  def satisfiable2[E[_,_] <: Expression](implicit i: BinaryInterpretation[E]): Option[E[Any, Any]] = Option.empty[E[Any, Any]]
-  def satisfiable3[E[_,_,_] <: Expression](implicit i: TertiaryInterpretation[E]): Option[E[Any, Any, Any]] = Option.empty[E[Any, Any, Any]]
+  def satisfiable1[E[_] <: Expression](implicit i: UnarySatisfaction[E]): Option[E[Any]] = Option.empty[E[Any]]
+  def satisfiable2[E[_,_] <: Expression](implicit i: BinarySatisfaction[E]): Option[E[Any, Any]] = Option.empty[E[Any, Any]]
+  def satisfiable3[E[_,_,_] <: Expression](implicit i: TertiarySatisfaction[E]): Option[E[Any, Any, Any]] = Option.empty[E[Any, Any, Any]]
 
   "satisfiable1" should "compile if the expression has a satisfying interpretation" in {
 

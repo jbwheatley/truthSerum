@@ -1,7 +1,4 @@
-package benassi
-
-package object satisfaction {
-
+package object benassi {
   type T = True
   type F = False
 
@@ -10,5 +7,4 @@ package object satisfaction {
   type |[L1, L2] = ~[~[L1] & ~[L2]]
   type ->[L1, L2] = ~[L1 & ~[L2]]
   type <->[L1, L2] = L1 -> L2 & (L2 -> L1)
-
 }
