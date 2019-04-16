@@ -1,5 +1,4 @@
 package benassi
-package satisfaction
 
 trait Truth[E]
 
