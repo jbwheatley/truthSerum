@@ -7,14 +7,14 @@ class BinaryInterpretation[E[_,_] <: Expression]
 trait BinaryInterpretations extends LowPriorityBinaryInterpretations {
 
   implicit def true2Interpretation[E[_, _] <: Expression]
-  (implicit i: TotalInterpretation[({type λ[α] = E[T, α]})#λ]
+  (implicit i: TotalInterpretation[E[T, ?]]
   ): BinaryInterpretation[E] = null
 }
 
 trait LowPriorityBinaryInterpretations extends TotalInterpretations {
 
   implicit def false2Interpretation[E[_, _] <: Expression]
-  (implicit i: TotalInterpretation[({type λ[α] = E[F, α]})#λ]
+  (implicit i: TotalInterpretation[E[F, ?]]
   ): BinaryInterpretation[E] = null
 
 }

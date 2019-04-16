@@ -53,3 +53,5 @@ resolvers ++= Seq (
   "Sonatype OSS Releases"  at "http://oss.sonatype.org/content/repositories/releases/",
   "Sonatype OSS Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
 )
+
+addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.0")
