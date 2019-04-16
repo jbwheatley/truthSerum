@@ -24,4 +24,29 @@ We define `type X[A, B] = A -> B` and we have a function defined `satisfiable[X]
   # Tautologies
   
 If a formula is true under all possible interpretations of its variables, then it is known as a tautology. We further provide the means to determine whether a formula is a tautology at compilation: i.e. `tautology[X]` that only compiles if X represents a logical tautology, and does not compile if even one interpretation resolves to false. For example consider the simplest tautological formula, the Law of Excluded Middle: `type X[A] = A | ~[A]`. `tautology[X]` will compile, whereas `tautology[(type Y[A, B] = A & B)]` will not compile, as the formula doesn't evaluate to true when, for example, `A` is true and `B` is false. 
+
+# Code examples
+
+```
+def satisfiable2[E[_,_]](implicit i: BinarySatisfaction[E]): Option[E[Any, Any]] = Option.empty[E[Any, Any]]
+
+type X[A, B] = ~[A] & ~[B]
+type Y[A, B] = ~[A -> (B -> A)]
+
+satisfiable2[X] //compiles!
+satisfiable2[Y] //does not compile!
+
+def tautology2[E[_,_]](implicit i: BinaryTautology[E]): Option[E[Any, Any]] = Option.empty[E[Any, Any]]
+
+type Z[A, B] = ((~[A] -> B) & (~[A] -> ~[B])) -> A //Law of Reductio ad Absurdum
+type W[A, B] = A -> B -> A
+
+tautology2[Z] //compiles!
+tautology2[W] //does not compiles!
+
+```
+
+
+
+
   
