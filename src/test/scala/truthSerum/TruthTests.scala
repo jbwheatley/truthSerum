@@ -1,4 +1,4 @@
-package benassi
+package truthSerum
 
 import org.scalatest.{FlatSpec, Matchers}
 

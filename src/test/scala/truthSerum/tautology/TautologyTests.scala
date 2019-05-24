@@ -1,4 +1,4 @@
-package benassi
+package truthSerum
 package tautology
 
 import org.scalatest.{FlatSpec, Matchers}

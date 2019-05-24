@@ -1,4 +1,4 @@
-package benassi
+package truthSerum
 package satisfaction
 
 trait BinarySatisfaction[E[_,_]]

@@ -1,4 +1,4 @@
-package benassi
+package truthSerum
 package tautology
 
 trait TertiaryTautology[E[_,_,_]]

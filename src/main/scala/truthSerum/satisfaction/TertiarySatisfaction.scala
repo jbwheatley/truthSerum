@@ -1,4 +1,4 @@
-package benassi
+package truthSerum
 package satisfaction
 
 trait TertiarySatisfaction[E[_,_,_]]

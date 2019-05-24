@@ -1,4 +1,4 @@
-package object benassi {
+package object truthSerum {
   type T = True
   type F = False
 

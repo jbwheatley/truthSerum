@@ -1,4 +1,4 @@
-package benassi
+package truthSerum
 
 trait Truth[E]
 
