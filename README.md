@@ -1,4 +1,4 @@
-#Truth Serum - compile time boolean logic
+# Truth Serum - compile time boolean logic
 
 In this project we use the Scala compiler to evaluate the truth of boolean logic formulae expressed at the type-level. The project is currently spilt into two parts: one in which we determine whether a formula containing variables has a satisfying interpretation, and one in which we determine whether a formula expresses a logical tautology. 
 Our expression types are built up from following classes: `~[A]` which represents `NOT A` and `&[A, B]` which respresents `A AND B`. All the rest of propositional logic can be defined as type aliases for some combination of these, e.g `type |[A, B] = ~[~[A] & [~B]]`. `True` and `False` are further represented by their own classes. 
