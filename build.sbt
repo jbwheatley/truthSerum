@@ -1,4 +1,4 @@
-name := "benassi"
+name := "truthSerum"
 
 scalaVersion := "2.12.8"
 
