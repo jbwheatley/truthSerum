@@ -1,4 +1,4 @@
-package benassi
+package truthSerum
 package tautology
 
 trait UnaryTautology[E[_]]

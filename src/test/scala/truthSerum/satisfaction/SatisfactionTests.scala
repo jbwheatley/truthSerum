@@ -1,6 +1,6 @@
-package benassi.satisfaction
+package truthSerum.satisfaction
 
-import benassi._
+import truthSerum._
 import org.scalatest.{FlatSpec, Matchers}
 
 class SatisfactionTests extends FlatSpec with Matchers {
