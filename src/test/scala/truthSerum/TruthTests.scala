@@ -1,6 +1,7 @@
 package truthSerum
 
 import org.scalatest.{FlatSpec, Matchers}
+import shapeless.test.illTyped
 
 class TruthTests extends FlatSpec with Matchers {
 
@@ -23,11 +24,11 @@ class TruthTests extends FlatSpec with Matchers {
 
     evaluate[![T] | (T & (T -> (F | (T & T <-> ![F & T]))))]
 
-    assertDoesNotCompile("evaluate[F]")
-    assertDoesNotCompile("evaluate[F & T]")
-    assertDoesNotCompile("evaluate[T & F]")
-    assertDoesNotCompile("evaluate[F & F]")
-    assertDoesNotCompile("evaluate[~[T]]")
+    illTyped("evaluate[F]", "could not find implicit value for parameter.*")
+    illTyped("evaluate[F & T]", "could not find implicit value for parameter.*")
+    illTyped("evaluate[T & F]", "could not find implicit value for parameter.*")
+    illTyped("evaluate[F & F]", "could not find implicit value for parameter.*")
+    illTyped("evaluate[![T]]", "could not find implicit value for parameter.*")
 
   }
 
