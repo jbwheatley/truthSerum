@@ -12,7 +12,7 @@ class TruthTests extends FlatSpec with Matchers {
 
     evaluate[T]
     evaluate[T & T]
-    evaluate[~[F]]
+    evaluate[![F]]
     evaluate[T | F]
     evaluate[F | T]
     evaluate[F -> F]
@@ -21,7 +21,7 @@ class TruthTests extends FlatSpec with Matchers {
     evaluate[T <-> T]
     evaluate[F <-> F]
 
-    evaluate[~[T] | (T & (T -> (F | (T & T <-> ~[F & T]))))]
+    evaluate[![T] | (T & (T -> (F | (T & T <-> ![F & T]))))]
 
     assertDoesNotCompile("evaluate[F]")
     assertDoesNotCompile("evaluate[F & T]")

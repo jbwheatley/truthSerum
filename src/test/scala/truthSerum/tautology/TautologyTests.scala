@@ -13,7 +13,7 @@ class TautologyTests extends FlatSpec with Matchers {
 
   "tautology1" should "compile only if the expression is tautological" in {
 
-    type X[A] = A | ~[A] // Law of the excluded middle
+    type X[A] = A | ![A] // Law of the excluded middle
 
     tautology1[X]
 
@@ -24,9 +24,9 @@ class TautologyTests extends FlatSpec with Matchers {
   "tautology2" should "compile only if the expression is tautological" in {
 
     type X[A, B] = (A & (A -> B)) -> B // Law of modus ponens
-    type XX[A, B] = (~[B] & (A -> B)) -> ~[A] //Law of modus tollens
-    type Y[A, B] = (A -> B) <-> (~[B] -> ~[A]) //Law of contraposition
-    type Z[A, B] = ((~[A] -> B) & (~[A] -> ~[B])) -> A //Reductio ad absurdum
+    type XX[A, B] = (![B] & (A -> B)) -> ![A] //Law of modus tollens
+    type Y[A, B] = (A -> B) <-> (![B] -> ![A]) //Law of contraposition
+    type Z[A, B] = ((![A] -> B) & (![A] -> ![B])) -> A //Reductio ad absurdum
 
     tautology2[X]
     tautology2[XX]

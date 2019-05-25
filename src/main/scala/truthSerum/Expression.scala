@@ -9,5 +9,5 @@ sealed trait TruthValue extends Expression
 class True extends TruthValue
 class False extends TruthValue
 
-class And[L1, L2] extends Operator
-class Not[L] extends Operator
+class &[L1, L2] extends Operator
+class ![L] extends Operator
