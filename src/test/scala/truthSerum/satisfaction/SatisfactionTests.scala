@@ -2,6 +2,7 @@ package truthSerum.satisfaction
 
 import truthSerum._
 import org.scalatest.{FlatSpec, Matchers}
+import shapeless.test.illTyped
 
 class SatisfactionTests extends FlatSpec with Matchers {
 
@@ -23,7 +24,7 @@ class SatisfactionTests extends FlatSpec with Matchers {
 
     type W[A] = A & ![A]
 
-    assertDoesNotCompile("satisfiable1[W]")
+    illTyped("satisfiable1[W]", "could not find implicit value for parameter.*")
   }
 
   "satisfiable2" should "compile if the expression has a satisfying interpretation" in {
@@ -38,7 +39,7 @@ class SatisfactionTests extends FlatSpec with Matchers {
 
     type W[A, B] = ![A -> (B -> A)]
 
-    assertDoesNotCompile("satisfiable2[W]")
+    illTyped("satisfiable2[W]", "could not find implicit value for parameter.*")
   }
 
   "satisfiable3" should "compile if the expression has a satisfying interpretation" in {
@@ -54,8 +55,8 @@ class SatisfactionTests extends FlatSpec with Matchers {
     type W[A, B, C] = ![A -> (B -> A)]
     type U[A, B, C] = A & ![A] & C & ![B] & B & ![C]
 
-    assertDoesNotCompile("satisfiable3[W]")
-    assertDoesNotCompile("satisfiable3[U]")
+    illTyped("satisfiable3[W]", "could not find implicit value for parameter.*")
+    illTyped("satisfiable3[U]", "could not find implicit value for parameter.*")
 
   }
 

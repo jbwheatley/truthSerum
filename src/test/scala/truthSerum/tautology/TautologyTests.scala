@@ -2,6 +2,7 @@ package truthSerum
 package tautology
 
 import org.scalatest.{FlatSpec, Matchers}
+import shapeless.test.illTyped
 
 class TautologyTests extends FlatSpec with Matchers {
 
@@ -18,7 +19,7 @@ class TautologyTests extends FlatSpec with Matchers {
     tautology1[X]
 
     type Y[A] = A | A
-    assertDoesNotCompile("tautology1[Y]")
+    illTyped("tautology1[Y]", "could not find implicit value for parameter.*")
   }
 
   "tautology2" should "compile only if the expression is tautological" in {
@@ -34,7 +35,7 @@ class TautologyTests extends FlatSpec with Matchers {
     tautology2[Z]
 
     type W[A, B] = A -> B -> A
-    assertDoesNotCompile("tautology2[W]")
+    illTyped("tautology2[W]", "could not find implicit value for parameter.*")
   }
 
   "tautology3" should "compile only if the expression is tautological" in {
@@ -46,7 +47,7 @@ class TautologyTests extends FlatSpec with Matchers {
     tautology3[Y]
 
     type W[A, B, C] = A | B | C
-    assertDoesNotCompile("tautology2[W]")
+    illTyped("tautology3[W]", "could not find implicit value for parameter.*")
   }
 
 
