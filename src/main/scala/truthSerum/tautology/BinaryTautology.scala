@@ -3,6 +3,5 @@ package tautology
 
 trait BinaryTautology[E[_,_]]
 
-object BinaryTautology {
-  implicit def tautology[E[_, _]](implicit t: UnaryTautology[E[T, ?]], f: UnaryTautology[E[F, ?]]): BinaryTautology[E] = null
-}
+object BinaryTautology:
+  given [E[_, _]](using UnaryTautology[[A] =>> E[True, A]], UnaryTautology[[A] =>> E[False, A]]): BinaryTautology[E] = null

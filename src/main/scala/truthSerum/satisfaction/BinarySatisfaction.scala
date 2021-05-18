@@ -3,19 +3,11 @@ package satisfaction
 
 trait BinarySatisfaction[E[_,_]]
 
-trait BinarySatifactions extends LowPriorityBinarySatifactions {
+trait BinarySatifactions extends LowPriorityBinarySatifactions:
+  given true2Interpretation[E[_, _]](using UnarySatisfaction[[A] =>> E[True, A]]): BinarySatisfaction[E] = null
 
-  implicit def true2Interpretation[E[_, _]]
-  (implicit i: UnarySatisfaction[E[T, ?]]
-  ): BinarySatisfaction[E] = null
-}
 
-trait LowPriorityBinarySatifactions {
-
-  implicit def false2Interpretation[E[_, _]]
-  (implicit i: UnarySatisfaction[E[F, ?]]
-  ): BinarySatisfaction[E] = null
-
-}
+trait LowPriorityBinarySatifactions:
+  given false2Interpretation[E[_, _]](using UnarySatisfaction[[A] =>> E[False, A]]): BinarySatisfaction[E] = null
 
 object BinarySatifactions extends BinarySatifactions

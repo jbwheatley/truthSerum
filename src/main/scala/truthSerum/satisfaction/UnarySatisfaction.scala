@@ -3,15 +3,10 @@ package satisfaction
 
 trait UnarySatisfaction[E[_]]
 
-trait UnarySatifactions extends LowPriorityUnaryInterpretation {
+trait UnarySatifactions extends LowPriorityUnaryInterpretation:
+  given trueInterpretation[E[_]](using Truth[E[True]]): UnarySatisfaction[E] = null
 
-  implicit def trueInterpretation[E[_]](implicit t: Truth[E[T]]): UnarySatisfaction[E] = null
-}
-
-trait LowPriorityUnaryInterpretation {
-
-  implicit def falseInterpretation[E[_]](implicit t: Truth[E[F]]): UnarySatisfaction[E] = null
-
-}
+trait LowPriorityUnaryInterpretation:
+  given falseInterpretation[E[_]](using Truth[E[False]]): UnarySatisfaction[E] = null
 
 object UnarySatifactions extends UnarySatifactions

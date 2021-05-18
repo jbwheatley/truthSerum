@@ -3,8 +3,5 @@ package tautology
 
 trait TertiaryTautology[E[_,_,_]]
 
-object TertiaryTautology {
-  implicit def tautology[E[_,_,_]](implicit t: BinaryTautology[E[T,?,?]], f: BinaryTautology[E[F,?,?]]): TertiaryTautology[E] = null
-}
-
-
+object TertiaryTautology:
+  given [E[_,_,_]](using BinaryTautology[[A, B] =>> E[True,A,B]], BinaryTautology[[A, B] =>> E[False,A,B]]): TertiaryTautology[E] = null

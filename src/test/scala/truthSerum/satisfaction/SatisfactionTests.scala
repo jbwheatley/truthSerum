@@ -1,64 +1,49 @@
 package truthSerum.satisfaction
 
-import truthSerum._
-import org.scalatest.{FlatSpec, Matchers}
-import shapeless.test.illTyped
+import truthSerum.*
 
-class SatisfactionTests extends FlatSpec with Matchers {
+object SatisfactionTests:
 
-  import SatisfactionImplicits._
+  import SatisfactionImplicits.given
 
-  def satisfiable1[E[_] <: Expression](implicit i: UnarySatisfaction[E]): Option[E[Any]] = Option.empty[E[Any]]
-  def satisfiable2[E[_,_] <: Expression](implicit i: BinarySatisfaction[E]): Option[E[Any, Any]] = Option.empty[E[Any, Any]]
-  def satisfiable3[E[_,_,_] <: Expression](implicit i: TertiarySatisfaction[E]): Option[E[Any, Any, Any]] = Option.empty[E[Any, Any, Any]]
+  def satisfiable1[E[_] <: Expression](using i: UnarySatisfaction[E]): Option[E[Any]] = Option.empty[E[Any]]
+  def satisfiable2[E[_,_] <: Expression](using i: BinarySatisfaction[E]): Option[E[Any, Any]] = Option.empty[E[Any, Any]]
+  def satisfiable3[E[_,_,_] <: Expression](using i: TertiarySatisfaction[E]): Option[E[Any, Any, Any]] = Option.empty[E[Any, Any, Any]]
+  
+  type X[A] = ![![![![A]]]]
+  type Y[A] = A & A
+  type Z[A] = ![A] | A
 
-  "satisfiable1" should "compile if the expression has a satisfying interpretation" in {
+  satisfiable1[X]
+  satisfiable1[Y]
+  satisfiable1[Z]
 
-    type X[A] = ![![![![A]]]]
-    type Y[A] = A & A
-    type Z[A] = ![A] | A
+  type W[A] = A & ![A]
 
-    satisfiable1[X]
-    satisfiable1[Y]
-    satisfiable1[Z]
+//  satisfiable1[W] //does not compile
+  
+  type X2[A, B] = A -> (B -> A)
+  type Y2[A, B] = ![A] & ![B]
+  type Z2[A, B] = B <-> A
 
-    type W[A] = A & ![A]
+  satisfiable2[X2]
+  satisfiable2[Y2]
+  satisfiable2[Z2]
 
-    illTyped("satisfiable1[W]", "could not find implicit value for parameter.*")
-  }
+  type W2[A, B] = ![A -> (B -> A)]
 
-  "satisfiable2" should "compile if the expression has a satisfying interpretation" in {
+//  satisfiable2[W2] //does not compile
 
-    type X[A, B] = A -> (B -> A)
-    type Y[A, B] = ![A] & ![B]
-    type Z[A, B] = B <-> A
+  type X3[A, B, C] = A -> B -> (B -> C -> (A -> C))
+  type Y3[A, B, C] = ![A] <-> B & ![C]
+  type Z3[A, B, C] = ![A & ![A] & C & ![B] & B & ![C]]
 
-    satisfiable2[X]
-    satisfiable2[Y]
-    satisfiable2[Z]
+  satisfiable3[X3]
+  satisfiable3[Y3]
+  satisfiable3[Z3]
 
-    type W[A, B] = ![A -> (B -> A)]
+  type W3[A, B, C] = ![A -> (B -> A)]
+  type U[A, B, C] = A & ![A] & C & ![B] & B & ![C]
 
-    illTyped("satisfiable2[W]", "could not find implicit value for parameter.*")
-  }
-
-  "satisfiable3" should "compile if the expression has a satisfying interpretation" in {
-
-    type X[A, B, C] = A -> B -> (B -> C -> (A -> C))
-    type Y[A, B, C] = ![A] <-> B & ![C]
-    type Z[A, B, C] = ![A & ![A] & C & ![B] & B & ![C]]
-
-    satisfiable3[X]
-    satisfiable3[Y]
-    satisfiable3[Z]
-
-    type W[A, B, C] = ![A -> (B -> A)]
-    type U[A, B, C] = A & ![A] & C & ![B] & B & ![C]
-
-    illTyped("satisfiable3[W]", "could not find implicit value for parameter.*")
-    illTyped("satisfiable3[U]", "could not find implicit value for parameter.*")
-
-  }
-
-
-}
+//  satisfiable3[W3] //does not compile
+//  satisfiable3[U] //does not compile
